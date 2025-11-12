@@ -39,6 +39,11 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok", message: "Server is running" })
 })
 
+// Root route handler
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to the Attendance API. See /api/health for status." })
+})
+
 // Global error handler - MUST be the last middleware
 app.use((err, req, res, next) => {
   console.error(err.stack)
