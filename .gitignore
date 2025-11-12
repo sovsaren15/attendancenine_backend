@@ -1,2 +1,8 @@
 # Environment variables
 .env
+
+# Firebase / Google Cloud credentials
+*.json
+
+# Dependencies
+/node_modules
