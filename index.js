@@ -1,11 +1,26 @@
 import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
+import admin from "firebase-admin"
 import attendanceRoutes from "./routes/attendance.js"
 import employeeRoutes from "./routes/employees.js"
 import uploadRoutes from "./routes/uploads.js"
 
 dotenv.config()
+
+// --- Firebase Admin SDK Initialization ---
+try {
+  const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON)
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  })
+  console.log("Firebase Admin SDK initialized successfully.")
+} catch (error) {
+  console.error("Failed to initialize Firebase Admin SDK:", error)
+  if (!process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
+    console.error("FIREBASE_SERVICE_ACCOUNT_JSON environment variable is not set or is empty.")
+  }
+}
 
 const app = express()
 
